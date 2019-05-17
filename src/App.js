@@ -5,13 +5,24 @@ import './App.css';
 
 class App extends Component {
 	inputElement = React.createRef();
-	
+
 	constructor() {
-		super()
+		super();
+		
 		this.state = {
 			items: [],
 			currentItem: { text: '', key: '' },
 		}
+	}
+
+	deleteItem = key => {
+	    const filteredItems = this.state.items.filter(item => {
+			return item.key !== key;
+	    });
+
+	    this.setState({
+	        items: filteredItems,
+	    });
 	}
 
 	handleInput = e => {
@@ -27,8 +38,8 @@ class App extends Component {
 		const newItem = this.state.currentItem;
 
 		if (newItem.text !== '') {
-			console.log(newItem);
 			const items = [...this.state.items, newItem];
+
 			this.setState({
 				items: items,
 				currentItem: { text: '', key: '' }
@@ -45,7 +56,10 @@ class App extends Component {
 					handleInput={this.handleInput}
 					currentItem={this.state.currentItem}
 				/>
-				<TodoItems entries={this.state.items} />
+				<TodoItems
+					entries={this.state.items}
+					deleteItem={this.deleteItem}
+				/>
 			</div>
 		)
 	}

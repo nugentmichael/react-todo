@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class TodoList extends Component {
     componentDidUpdate() {
-        this.props.inputElement.current.focus()
+        this.props.inputElement.current.focus();
     }
 
     render() {
