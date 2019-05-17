@@ -4,6 +4,8 @@ import TodoItems from './TodoItems.js';
 import './App.css';
 
 class App extends Component {
+	inputElement = React.createRef();
+	
 	constructor() {
 		super()
 		this.state = {
@@ -22,7 +24,7 @@ class App extends Component {
 
 	addItem = e => {
 		e.preventDefault();
-		const newItem = this.state.currentItems;
+		const newItem = this.state.currentItem;
 
 		if (newItem.text !== '') {
 			console.log(newItem);
@@ -43,6 +45,7 @@ class App extends Component {
 					handleInput={this.handleInput}
 					currentItem={this.state.currentItem}
 				/>
+				<TodoItems entries={this.state.items} />
 			</div>
 		)
 	}
