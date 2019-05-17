@@ -20,8 +20,17 @@ class App extends Component {
 	}
 
 	addItem = e => {
-		e.preventDefault()
-		console.log('Hello add item');
+		e.preventDefault();
+		const newItem = this.state.currentItems;
+
+		if (newItem.text !== '') {
+			console.log(newItem);
+			const items = [...this.state.items, newItem];
+			this.setState({
+				items: items,
+				currentItem: { text: '', key: '' }
+			});
+		}
 	}
 
 	render() {
