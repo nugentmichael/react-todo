@@ -1,3 +1,32 @@
+/* Import Roboto typeface */
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    padding: 50px;
+    background: #7abcff;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #7abcff 0%, #60abf8 44%, #4096ee 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #7abcff 0%, #60abf8 44%, #4096ee 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #7abcff 0%, #60abf8 44%, #4096ee 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7abcff', endColorstr='#4096ee', GradientType=0);
+    /* IE6-9 */
+    font-family: 'Roboto', sans-serif;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+}
+
 .App {
     text-align: center;
 }
@@ -33,38 +62,157 @@
     }
 }
 
-body {
+.wrapper {
     padding: 50px;
-    background-color: #66CCFF;
-    font-family: sans-serif;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    background-size: 1800% 1800%;
+    -webkit-animation: rainbow 18s ease infinite;
+    -z-animation: rainbow 18s ease infinite;
+    -o-animation: rainbow 18s ease infinite;
+    animation: rainbow 18s ease infinite;
 }
 
-#container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column-reverse;
+@-webkit-keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
+
+@-moz-keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
+
+@-o-keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
+}
+
+#title {
+    text-align: center;
+    font-size: 3vw;
+    font-weight: 800;
+    opacity: 0.8;
+    background: #4096ee;
+    background: -webkit-linear-gradient(left, orange, violet);
+    background: -o-linear-gradient(right, orange, violet);
+    background: -moz-linear-gradient(right, orange, violet);
+    background: linear-gradient(to right, orange, violet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.todoListMain .header {
+    margin: 25px 0;
 }
 
 .todoListMain .header input {
     padding: 10px;
     font-size: 16px;
-    border: 2px solid #FFF;
     width: 165px;
+    opacity: 0.9;
+    transition: border 400ms ease-out;
 }
 
 .todoListMain .header button {
-    padding: 10px;
-    font-size: 16px;
+    position: relative;
+    display: inline-block;
     margin: 10px;
-    margin-right: 0px;
-    background-color: #0066FF;
+    padding: 10px;
+    height: 42px;
+    font-size: 16px;
     color: #FFF;
-    border: 2px solid #0066FF;
+    border: none;
+    opacity: 0.8;
+    background: rgb(43, 29, 232);
+    background: linear-gradient(90deg, rgba(43, 29, 232, 1) 0%, rgba(238, 130, 238, 1) 100%);
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
 
-.todoListMain .header button:hover {
-    background-color: #003399;
-    border: 2px solid #003399;
+.todoListMain .header button:hover::before,
+.todoListMain .header button:focus::before,
+.todoListMain .header button:active::before {
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+}
+
+.todoListMain .header button::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgb(255, 165, 0);
+    background: linear-gradient(90deg, rgba(255, 165, 0, 1) 0%, rgba(238, 130, 238, 1) 100%);
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    -webkit-transform-origin: 50%;
+    transform-origin: 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.todoListMain .header button:hover,
+.todoListMain .header button:focus,
+.todoListMain .header button:active {
+    color: #FFF;
     cursor: pointer;
 }
 
@@ -94,15 +242,50 @@ ul.theList {
 
 
 .theList li {
+	position: relative;
+	padding: 15px;
+	margin-bottom: 15px;
     color: #333;
-    background-color: rgba(255, 255, 255, .5);
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    transition: background-color .2s ease-out;
+    background-color: rgba(255, 255, 255, .8);
+    border-radius: 5px;	
+	-webkit-transform: perspective(1px) translateZ(0);
+	transform: perspective(1px) translateZ(0);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	-webkit-transition-property: color;
+	transition-property: color;
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
 }
 
-.todoListMain .theList li:hover {
-    background-color: pink;
-    cursor: pointer;
+.theList li::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: red;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 0 50%;
+    transform-origin: 0 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.theList li:hover {
+	cursor: pointer;
+	color: #FFF;
+}
+
+.theList li:hover::before,
+.theList li:focus::before,
+.theList li:active::before {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
 }
