@@ -1,66 +1,79 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import TodoList from './TodoList.js';
 import TodoItems from './TodoItems.js';
 import './App.css';
 
 export default class App extends Component {
-	inputElement = React.createRef();
+    inputElement = React.createRef();
 
-	constructor() {
-		super();
-		
-		this.state = {
-			items: [],
-			currentItem: { text: '', key: '' },
-		}
-	}
+    constructor() {
+        super();
 
-	deleteItem = key => {
-	    const filteredItems = this.state.items.filter(item => {
-			return item.key !== key;
-	    });
+        this.state = {
+            items: [],
+            currentItem: {
+                text: '',
+                key: ''
+            }
+        }
+    }
 
-	    this.setState({
-	        items: filteredItems,
-	    });
-	}
+    deleteItem = key => {
+        const filteredItems = this
+            .state
+            .items
+            .filter(item => {
+                return item.key !== key;
+            });
 
-	handleInput = e => {
-		const itemText = e.target.value;
-		const currentItem = { text: itemText, key: Date.now() }
-		this.setState({
-			currentItem,
-		});
-	}
+        this.setState({items: filteredItems});
+    }
 
-	addItem = e => {
-		e.preventDefault();
-		const newItem = this.state.currentItem;
+    handleInput = e => {
+        const itemText = e.target.value;
+        const currentItem = {
+            text: itemText,
+            key: Date.now()
+        }
+        this.setState({currentItem});
+    }
 
-		if (newItem.text !== '') {
-			const items = [...this.state.items, newItem];
+    addItem = e => {
+        e.preventDefault();
+        const newItem = this.state.currentItem;
 
-			this.setState({
-				items: items,
-				currentItem: { text: '', key: '' }
-			});
-		}
-	}
+        if (newItem.text !== '') {
+            const items = [
+                ...this.state.items,
+                newItem
+            ];
 
-	render() {
-		return (
-			<div className="App">
-				<TodoList
-					addItem={this.addItem}
-					inputElement={this.inputElement}
-					handleInput={this.handleInput}
-					currentItem={this.state.currentItem}
-				/>
-				<TodoItems
-					entries={this.state.items}
-					deleteItem={this.deleteItem}
-				/>
-			</div>
-		)
-	}
+            this.setState({
+                items: items,
+                currentItem: {
+                    text: '',
+                    key: ''
+                },
+                allTasks: this
+                    .state
+                    .items
+                    .concat(newItem)
+            }, () => {
+                localStorage.setItem('allTasks', JSON.stringify(this.state.items))
+            });
+        }
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <TodoList
+                    addItem={this.addItem}
+                    inputElement={this.inputElement}
+                    handleInput={this.handleInput}
+                    currentItem={this.state.currentItem}/>
+                <TodoItems entries={this.state.items} deleteItem={this.deleteItem}/>
+            </div>
+        )
+    }
 }

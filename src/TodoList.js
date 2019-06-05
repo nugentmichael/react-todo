@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 export default class TodoList extends Component {
     componentDidUpdate() {
-        this.props.inputElement.current.focus();
+        this
+            .props
+            .inputElement
+            .current
+            .focus();
     }
 
     render() {
@@ -14,9 +18,8 @@ export default class TodoList extends Component {
                             placeholder="Task"
                             ref={this.props.inputElement}
                             value={this.props.currentItem.text}
-                            onChange={this.props.handleInput}
-                        />
-                        
+                            onChange={this.props.handleInput}/>
+
                         <button type="submit">Add Task</button>
                     </form>
                 </div>
