@@ -6,8 +6,8 @@ import './App.css';
 export default class App extends Component {
     inputElement = React.createRef();
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             items: [],
@@ -26,7 +26,11 @@ export default class App extends Component {
                 return item.key !== key;
             });
 
-        this.setState({items: filteredItems});
+		this.setState({
+			items: filteredItems
+		}, () => {
+			localStorage.setItem('allItems', JSON.stringify(this.state.items));
+		});
     }
 
     handleInput = e => {
@@ -36,6 +40,7 @@ export default class App extends Component {
             key: Date.now()
         }
         this.setState({currentItem});
+        // localStorage.setItem(currentItem.key, currentItem.text);
     }
 
     addItem = e => {
@@ -53,13 +58,10 @@ export default class App extends Component {
                 currentItem: {
                     text: '',
                     key: ''
-                },
-                allTasks: this
-                    .state
-                    .items
-                    .concat(newItem)
+                }
             }, () => {
-                localStorage.setItem('allTasks', JSON.stringify(this.state.items))
+                localStorage.setItem('allItems', JSON.stringify(this.state.items));
+                localStorage.setItem('newItems', '');
             });
         }
     }
