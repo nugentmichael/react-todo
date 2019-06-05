@@ -3,7 +3,7 @@ import TodoList from './TodoList.js';
 import TodoItems from './TodoItems.js';
 import './App.css';
 
-class App extends Component {
+export default class App extends Component {
 	inputElement = React.createRef();
 
 	constructor() {
@@ -64,5 +64,3 @@ class App extends Component {
 		)
 	}
 }
-
-export default App;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class TodoList extends Component {
+export default class TodoList extends Component {
     componentDidUpdate() {
         this.props.inputElement.current.focus();
     }
@@ -24,5 +24,3 @@ class TodoList extends Component {
         )
     }
 }
-
-export default TodoList;
