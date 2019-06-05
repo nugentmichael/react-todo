@@ -18,6 +18,10 @@ export default class App extends Component {
         }
     }
 
+    componentDidMount() {
+        this.retrieveItems();
+    }
+
     deleteItem = key => {
         const filteredItems = this
             .state
@@ -26,11 +30,11 @@ export default class App extends Component {
                 return item.key !== key;
             });
 
-		this.setState({
-			items: filteredItems
-		}, () => {
-			localStorage.setItem('allItems', JSON.stringify(this.state.items));
-		});
+        this.setState({
+            items: filteredItems
+        }, () => {
+            localStorage.setItem('allItems', JSON.stringify(this.state.items));
+        });
     }
 
     handleInput = e => {
@@ -40,7 +44,6 @@ export default class App extends Component {
             key: Date.now()
         }
         this.setState({currentItem});
-        // localStorage.setItem(currentItem.key, currentItem.text);
     }
 
     addItem = e => {
@@ -61,8 +64,14 @@ export default class App extends Component {
                 }
             }, () => {
                 localStorage.setItem('allItems', JSON.stringify(this.state.items));
-                localStorage.setItem('newItems', '');
             });
+        }
+    }
+
+    retrieveItems = () => {
+        if (localStorage.getItem('allItems') !== null) {
+            const list = JSON.parse(localStorage.getItem('allItems'));
+            this.setState({items: list});
         }
     }
 
