@@ -1,6 +1,16 @@
 # React To-Do List App
 
-This is a simple To-Do List web application built using the ReactJS framework. 
+This is a simple To-Do List web application built using the ReactJS framework.
+
+Each list item is stored within a parent JSON array, which is then saved as a Local Storage object in the browser to retain the state of your list.
+
+### Features To Implement
+
+* Drag-and-Drop item placement
+* List categories (shopping, personal, etc.)
+* Upgrade from saving items in a Local Storage object to a database schema in [Firebase](https://firebase.google.com)
+
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
