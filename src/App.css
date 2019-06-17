@@ -294,3 +294,21 @@ ul.theList {
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
 }
+
+#repo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 50px 0;
+	text-decoration: none;
+	color: #FFF;
+}
+
+#repo img {
+	width: 25px;
+	height: 25px;
+}
+
+#repo span {
+	margin-left: 10px;
+}
