@@ -95,6 +95,22 @@ export default class App extends Component {
 					function dragLeave(e) {
 						this.classList.remove('over');
 					}
+
+					function handleDrop(e) {
+						if (e.stopPropagation) {
+							e.stopPropagation();
+						}
+
+						return false;
+					}
+
+					function dragEnd(e) {
+						[].forEach.call(listItems, function(listItem) {
+							listItem.classList.remove('over');
+						});
+
+						this.style.opacity = '1';
+					}
 				
 					const listItems = document.querySelectorAll('.theList li');
 					
@@ -103,6 +119,8 @@ export default class App extends Component {
 						listItem.addEventListener('dragenter', dragEnter, false);
 						listItem.addEventListener('dragover', dragOver, false);
 						listItem.addEventListener('dragleave', dragLeave, false);
+						listItem.addEventListener('drop', handleDrop, false);
+						listItem.addEventListener('dragend', dragEnd, false);
 					});
 			});
         }
