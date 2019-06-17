@@ -74,8 +74,14 @@ export default class App extends Component {
 			this.setState({
 				items: list
 			}, () => {
+					let dragElement = null;
+					
 					function dragStart(e) {
 						this.style.opacity = '0.4';
+						dragElement = this;
+
+						e.dataTransfer.effectAllowed = 'move';
+						e.dataTransfer.setData('text/html', this.innerHTML);
 					}
 					
 					function dragOver(e) {
@@ -99,6 +105,11 @@ export default class App extends Component {
 					function handleDrop(e) {
 						if (e.stopPropagation) {
 							e.stopPropagation();
+						}
+
+						if (dragElement !== this) {
+							dragElement.innerHTML = this.innerHTML;
+							this.innerHTML = e.dataTransfer.getData('text/html');
 						}
 
 						return false;
