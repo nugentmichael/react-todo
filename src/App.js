@@ -74,15 +74,36 @@ export default class App extends Component {
 			this.setState({
 				items: list
 			}, () => {
-				function dragStart(e) {
-					this.style.opacity = "0.4";
-				}	
+					function dragStart(e) {
+						this.style.opacity = '0.4';
+					}
+					
+					function dragOver(e) {
+						if (e.preventDefault) {
+							e.preventDefault();
+						}
+
+						e.dataTransfer.dropEffect = 'move';
+
+						return false;
+					}
+
+					function dragEnter(e) {
+						this.classList.add('over');
+					}
+
+					function dragLeave(e) {
+						this.classList.remove('over');
+					}
 				
-				const listItems = document.querySelectorAll('.theList li');
-				
-				[].forEach.call(listItems, function(listItem) {
-					listItem.addEventListener('dragstart', dragStart, false);
-				});
+					const listItems = document.querySelectorAll('.theList li');
+					
+					[].forEach.call(listItems, function(listItem) {
+						listItem.addEventListener('dragstart', dragStart, false);
+						listItem.addEventListener('dragenter', dragEnter, false);
+						listItem.addEventListener('dragover', dragOver, false);
+						listItem.addEventListener('dragleave', dragLeave, false);
+					});
 			});
         }
 	}
