@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 export default class TodoItems extends Component {
     createTasks = item => {
         return (
-			<li key={item.key} draggable onClick={() => this.props.deleteItem(item.key)}>
+			<li key={item.key} draggable="true" onClick={() => this.props.deleteItem(item.key)}>
                 {item.text}
             </li>
         )

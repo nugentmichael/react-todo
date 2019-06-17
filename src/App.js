@@ -19,7 +19,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        this.retrieveItems();
+		this.retrieveItems();
     }
 
     deleteItem = key => {
@@ -71,9 +71,21 @@ export default class App extends Component {
     retrieveItems = () => {
         if (localStorage.getItem('allItems') !== null) {
             const list = JSON.parse(localStorage.getItem('allItems'));
-            this.setState({items: list});
+			this.setState({
+				items: list
+			}, () => {
+				function dragStart(e) {
+					this.style.opacity = "0.4";
+				}	
+				
+				const listItems = document.querySelectorAll('.theList li');
+				
+				[].forEach.call(listItems, function(listItem) {
+					listItem.addEventListener('dragstart', dragStart, false);
+				});
+			});
         }
-    }
+	}
 
     render() {
         return (
