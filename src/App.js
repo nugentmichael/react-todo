@@ -19,7 +19,7 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-		this.retrieveItems();
+        this.retrieveItems();
     }
 
     deleteItem = key => {
@@ -71,71 +71,85 @@ export default class App extends Component {
     retrieveItems = () => {
         if (localStorage.getItem('allItems') !== null) {
             const list = JSON.parse(localStorage.getItem('allItems'));
-			this.setState({
-				items: list
-			}, () => {
-					let dragElement = null;
-					
-					function dragStart(e) {
-						this.style.opacity = '0.4';
-						dragElement = this;
+            this.setState({
+                items: list
+            }, () => {
+                let dragElement = null;
 
-						e.dataTransfer.effectAllowed = 'move';
-						e.dataTransfer.setData('text/html', this.innerHTML);
-					}
-					
-					function dragOver(e) {
-						if (e.preventDefault) {
-							e.preventDefault();
-						}
+                function dragStart(e) {
+                    this.style.opacity = '0.4';
+                    dragElement = this;
 
-						e.dataTransfer.dropEffect = 'move';
+                    e.dataTransfer.effectAllowed = 'move';
+                    e
+                        .dataTransfer
+                        .setData('text/html', this.innerHTML);
+                }
 
-						return false;
-					}
+                function dragOver(e) {
+                    if (e.preventDefault) {
+                        e.preventDefault();
+                    }
 
-					function dragEnter(e) {
-						this.classList.add('over');
-					}
+                    e.dataTransfer.dropEffect = 'move';
 
-					function dragLeave(e) {
-						this.classList.remove('over');
-					}
+                    return false;
+                }
 
-					function handleDrop(e) {
-						if (e.stopPropagation) {
-							e.stopPropagation();
-						}
+                function dragEnter(e) {
+                    this
+                        .classList
+                        .add('over');
+                }
 
-						if (dragElement !== this) {
-							dragElement.innerHTML = this.innerHTML;
-							this.innerHTML = e.dataTransfer.getData('text/html');
-						}
+                function dragLeave(e) {
+                    this
+                        .classList
+                        .remove('over');
+                }
 
-						return false;
-					}
+                function handleDrop(e) {
+                    if (e.stopPropagation) {
+                        e.stopPropagation();
+                    }
 
-					function dragEnd(e) {
-						[].forEach.call(listItems, function(listItem) {
-							listItem.classList.remove('over');
-						});
+                    if (dragElement !== this) {
+                        dragElement.innerHTML = this.innerHTML;
+                        this.innerHTML = e
+                            .dataTransfer
+                            .getData('text/html');
+                    }
 
-						this.style.opacity = '1';
-					}
-				
-					const listItems = document.querySelectorAll('.theList li');
-					
-					[].forEach.call(listItems, function(listItem) {
-						listItem.addEventListener('dragstart', dragStart, false);
-						listItem.addEventListener('dragenter', dragEnter, false);
-						listItem.addEventListener('dragover', dragOver, false);
-						listItem.addEventListener('dragleave', dragLeave, false);
-						listItem.addEventListener('drop', handleDrop, false);
-						listItem.addEventListener('dragend', dragEnd, false);
-					});
-			});
+                    return false;
+                }
+
+                function dragEnd(e) {
+                    []
+                        .forEach
+                        .call(listItems, function (listItem) {
+                            listItem
+                                .classList
+                                .remove('over');
+                        });
+
+                    this.style.opacity = '1';
+                }
+
+                const listItems = document.querySelectorAll('.theList li');
+
+                []
+                    .forEach
+                    .call(listItems, function (listItem) {
+                        listItem.addEventListener('dragstart', dragStart, false);
+                        listItem.addEventListener('dragenter', dragEnter, false);
+                        listItem.addEventListener('dragover', dragOver, false);
+                        listItem.addEventListener('dragleave', dragLeave, false);
+                        listItem.addEventListener('drop', handleDrop, false);
+                        listItem.addEventListener('dragend', dragEnd, false);
+                    });
+            });
         }
-	}
+    }
 
     render() {
         return (
